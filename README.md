@@ -42,6 +42,7 @@ cargo run --bin task3
 # done. elapsed = 53.779108041s
 ```
 #### Task 4
+Runs on seperate files
 ```bash
 cargo run --bin task4 -- --dir ./files/raw --files 1000 --threads 50
 # n_most_frequent_words = [("the", 4089015), ("of", 2463799), ("and", 2266480), ("to", 1857958), ("", 1575462), ("a", 1519845), ("in", 1151617), ("I", 760541), ("that", 747608), ("was", 741022)]
@@ -50,6 +51,7 @@ cargo run --bin task4 -- --dir ./files/raw --files 1000 --threads 50
 # done. elapsed = 54.204670625s
 ```
 #### Task 5
+Runs on seperate files
 ```bash
 cargo run --bin task5 -- --dir ./files/raw --files 1000 --threads 1000 --word harry
 # word = "harry" found = 60
