@@ -21,6 +21,7 @@ async fn main() {
             let sentence_count_c = sentence_count.clone();
             async move {
                 let path = format!("{cargo_dir}/files/raw/{x}.txt");
+                println!("file = {path}");
                 if let Err(err) =
                     analyze_file_by_splitting_concurrent(&path, word_count_c, b'\n').await
                 {

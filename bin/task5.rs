@@ -47,7 +47,7 @@ async fn run(opt: Opt) -> anyhow::Result<()> {
                 if let Err(err) =
                     analyze_file_by_splitting_concurrent(&path, word_search_c, b'\n').await
                 {
-                    eprintln!("analyze_file word_count error {}", err)
+                    eprintln!("analyze_file word_search error {}", err)
                 }
             }
         })

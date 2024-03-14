@@ -5,9 +5,10 @@ use lib::{
 
 #[tokio::main]
 async fn main() {
+    let start_time = tokio::time::Instant::now();
     let cargo_dir = std::env!("CARGO_MANIFEST_DIR");
     println!("cargo_dir = {cargo_dir:?}");
-    let path = format!("{cargo_dir}/files/raw/1.txt");
+    let path = format!("{cargo_dir}/files/joined/1000.txt");
     let mut word_count = WordCount::new();
     let mut sentence_count = SentenceCount::new(5, 150);
 
@@ -24,4 +25,7 @@ async fn main() {
     );
     println!("n_unique_words = {}", word_count.n_unique_words());
     println!("n_sentence_= {}", sentence_count.n_sentence());
+
+    let end_time = tokio::time::Instant::now();
+    println!("done. elapsed = {:?}", end_time.duration_since(start_time));
 }
