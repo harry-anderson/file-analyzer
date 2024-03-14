@@ -1,0 +1,41 @@
+[package]
+name = "solution"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "lib"
+path = "src/lib.rs"
+
+[[bin]]
+name = "downloader"
+path = "bin/downloader.rs"
+
+[[bin]]
+name = "task1"
+path = "bin/task1.rs"
+
+[[bin]]
+name = "task2"
+path = "bin/task2.rs"
+
+[[bin]]
+name = "task3"
+path = "bin/task3.rs"
+
+[[bin]]
+name = "task4"
+path = "bin/task4.rs"
+
+[[bin]]
+name = "task5"
+path = "bin/task5.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.81"
+futures-util = "0.3.30"
+reqwest = "0.11.25"
+structopt = "0.3.26"
+tokio = { version = "1.36.0", features = ["full", "io-util"] }
