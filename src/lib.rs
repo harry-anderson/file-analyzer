@@ -59,7 +59,25 @@ pub async fn analyze_file_by_splitting_concurrent(
 mod tests {
     use reqwest::StatusCode;
 
+    use crate::analyzer::{
+        sentence_count::SentenceCount, word_count::WordCount, word_search::WordSearch,
+    };
+
     use super::*;
+    #[tokio::test]
+    async fn download() {
+        let client = reqwest::Client::new();
+        let res = client
+            .get(format!("{BUCKET_URL}/1.txt"))
+            .send()
+            .await
+            .unwrap();
+
+        assert_eq!(res.status(), StatusCode::OK);
+
+        let body = res.text().await.unwrap();
+        println!("body_len = {}", body.len())
+    }
 
     #[tokio::test]
     async fn concurrent_download() {
@@ -82,5 +100,46 @@ mod tests {
                 }
             })
             .await;
+    }
+
+    #[tokio::test]
+    async fn word_count() {
+        let mut wc = WordCount::new();
+        let cargo_dir = std::env!("CARGO_MANIFEST_DIR");
+        let path = format!("{cargo_dir}/files/raw/1.txt");
+        analyze_file_by_splitting(&path, &mut wc, b'\n')
+            .await
+            .unwrap();
+
+        assert_eq!(wc.n_unique_words(), 4704);
+
+        let most_freq = wc.n_most_frequent(1);
+        let most_freq = most_freq.get(0).unwrap();
+        assert_eq!(most_freq.0, String::from("the"));
+        assert_eq!(most_freq.1, 1248);
+    }
+
+    #[tokio::test]
+    async fn sentence_count() {
+        let mut sc = SentenceCount::new(5, 150);
+        let cargo_dir = std::env!("CARGO_MANIFEST_DIR");
+        let path = format!("{cargo_dir}/files/raw/1.txt");
+        analyze_file_by_splitting(&path, &mut sc, b'\n')
+            .await
+            .unwrap();
+
+        assert_eq!(sc.n_sentence(), 1712);
+    }
+
+    #[tokio::test]
+    async fn word_search() {
+        let mut ws = WordSearch::new(String::from("the"));
+        let cargo_dir = std::env!("CARGO_MANIFEST_DIR");
+        let path = format!("{cargo_dir}/files/raw/1.txt");
+        analyze_file_by_splitting(&path, &mut ws, b'\n')
+            .await
+            .unwrap();
+
+        assert_eq!(ws.num_paths(), 1);
     }
 }

@@ -49,6 +49,14 @@ cargo run --bin task4 -- --dir ./files/raw --files 1000 --threads 50
 # n_unique_words = 2307681
 # n_sentences = 3054745
 # done. elapsed = 54.204670625s
+
+cargo run tests
+# running 5 tests
+# test tests::word_search ... ok
+# test tests::sentence_count ... ok
+# test tests::word_count ... ok
+# test tests::concurrent_download ... ok
+# test tests::download ... ok
 ```
 #### Task 5
 Runs on seperate files
