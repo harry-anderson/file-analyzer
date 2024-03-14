@@ -23,7 +23,7 @@ impl SentenceCount {
 
 impl Analyzer for SentenceCount {
     fn process_chunk(&mut self, _path: &str, chunk: &str) {
-        let words = chunk.split(" ").count();
+        let words = chunk.split(' ').count();
         if words > self.min_words && words < self.max_words {
             self.n_sentence += 1
         }

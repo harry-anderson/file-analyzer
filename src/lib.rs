@@ -26,7 +26,7 @@ pub async fn analyze_file_by_splitting(
         if chunk.is_empty() {
             continue;
         }
-        analyzer.process_chunk(&path, chunk);
+        analyzer.process_chunk(path, chunk);
         buf.clear();
     }
 

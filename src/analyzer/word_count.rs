@@ -7,6 +7,12 @@ pub struct WordCount {
     words: HashMap<String, usize>,
 }
 
+impl Default for WordCount {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl WordCount {
     pub fn new() -> Self {
         Self {
@@ -21,13 +27,13 @@ impl WordCount {
     }
 
     pub fn n_unique_words(&self) -> usize {
-        self.words.keys().map(|k| k.to_owned()).count()
+        self.words.keys().count()
     }
 }
 
 impl Analyzer for WordCount {
-    fn process_chunk(&mut self, path: &str, chunk: &str) {
-        chunk.split(" ").for_each(|x| {
+    fn process_chunk(&mut self, _path: &str, chunk: &str) {
+        chunk.split(' ').for_each(|x| {
             self.words
                 .entry(x.to_owned())
                 .and_modify(|e| *e += 1)
