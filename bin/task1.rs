@@ -5,7 +5,7 @@ async fn main() {
     let start_time = tokio::time::Instant::now();
     let cargo_dir = std::env!("CARGO_MANIFEST_DIR");
     println!("cargo_dir = {cargo_dir:?}");
-    let path = format!("{cargo_dir}/files/joined/1000.txt");
+    let path = format!("{cargo_dir}/files/joined/all.txt");
 
     let mut word_count = WordCount::new();
 

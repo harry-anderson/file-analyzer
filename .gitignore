@@ -1,4 +1,4 @@
 /target
 /download
-/files/raw
-/files/joined
+files/raw/*
+files/joined/*

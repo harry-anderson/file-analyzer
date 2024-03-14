@@ -13,7 +13,6 @@ struct Opt {
     files: usize,
     #[structopt(long)]
     threads: usize,
-
     #[structopt(long)]
     word: String,
 }

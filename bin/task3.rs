@@ -15,8 +15,8 @@ async fn main() {
     let word_count = Arc::new(Mutex::new(WordCount::new()));
     let sentence_count = Arc::new(Mutex::new(SentenceCount::new(5, 150)));
 
-    futures_util::stream::iter(1..500)
-        .for_each_concurrent(20, |x| {
+    futures_util::stream::iter(1..1000)
+        .for_each_concurrent(1000, |x| {
             let word_count_c = word_count.clone();
             let sentence_count_c = sentence_count.clone();
             async move {
@@ -25,13 +25,13 @@ async fn main() {
                 if let Err(err) =
                     analyze_file_by_splitting_concurrent(&path, word_count_c, b'\n').await
                 {
-                    eprintln!("analyze_file word_count error {}", err)
+                    eprintln!("{x}.txt analyze_file word_count error {}", err)
                 }
 
                 if let Err(err) =
                     analyze_file_by_splitting_concurrent(&path, sentence_count_c, b'.').await
                 {
-                    eprintln!("analyze_file sentence_count error {}", err)
+                    eprintln!("{x}.txt analyze_file sentence_count error {}", err)
                 }
             }
         })
